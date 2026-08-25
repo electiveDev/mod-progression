@@ -1,10 +1,41 @@
+-- If the target loot row already exists, remove only the colliding old row.
+-- Otherwise the item replacement below remains unchanged.
+DELETE old
+FROM `creature_loot_template` AS old
+JOIN `creature_loot_template` AS target
+  ON target.`Entry` = old.`Entry`
+ AND target.`Reference` = old.`Reference`
+ AND target.`GroupId` = old.`GroupId`
+ AND target.`Item` = 750
+WHERE old.`Entry` IN (69, 299) AND old.`Item` = 50432;
+
 UPDATE `creature_loot_template` SET `Item` = 750 WHERE `entry` IN ( -- Tough Wolf Meat
     69, -- Diseased Timber Wolf
     299 -- Diseased Young Wolf
 ) AND `Item` = 50432; -- Diseased Wolf Pelt
+DELETE old
+FROM `creature_loot_template` AS old
+JOIN `creature_loot_template` AS target
+  ON target.`Entry` = old.`Entry`
+ AND target.`Reference` = old.`Reference`
+ AND target.`GroupId` = old.`GroupId`
+ AND target.`Item` = 17008
+WHERE old.`Entry` = 4421 AND old.`Item` = 49205;
+
 UPDATE `creature_loot_template` SET `Item` = 17008 WHERE `entry` IN ( -- Small Scroll
     4421 -- Charlga Razorflank <The Crone>
 ) AND `Item` = 49205; -- Small Scroll
+-- The core database may already contain the phase-appropriate emblem rows.
+-- Remove only colliding Emblem of Triumph rows; otherwise the replacements below apply.
+DELETE old
+FROM `creature_loot_template` AS old
+JOIN `creature_loot_template` AS target
+  ON target.`Entry` = old.`Entry`
+ AND target.`Reference` = old.`Reference`
+ AND target.`GroupId` = old.`GroupId`
+ AND target.`Item` IN (40752, 40753)
+WHERE old.`Item` = 47241;
+
 UPDATE `creature_loot_template` SET `Item` = 40752 WHERE `entry` IN ( -- Emblem of Heroism
     15931, -- Grobbulus
     15932, -- Gluth

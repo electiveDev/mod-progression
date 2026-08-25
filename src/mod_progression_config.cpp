@@ -150,8 +150,6 @@ void Progression::OnAfterConfigLoad(bool reload)
         float honorRate = sWorld->getRate(RATE_HONOR);
         if (PhaseId < 2)
             honorRate = 0.0f;
-        else
-            honorRate = 0.5f;
 
         LOG_INFO("server.loading", ">> Honor rate set to {}", honorRate);
         sWorld->setRate(RATE_HONOR, honorRate);
